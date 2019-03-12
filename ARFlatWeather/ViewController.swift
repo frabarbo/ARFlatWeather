@@ -133,8 +133,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDeleg
         // napoli 40.833333°, 14.25°
         // caserta 41.066667°, 14.333333°
         
-//        let openWeatherEndpoint = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&units=metric&appid=6243c02604de2ed1242e77d372bc92a3" //API-TOKEN
-        let openWeatherEndpoint = "https://api.openweathermap.org/data/2.5/forecast?lat=41.066667&lon=14.333333&units=metric&appid=6243c02604de2ed1242e77d372bc92a3" //API-TOKEN
+        let openWeatherEndpoint = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&units=metric&appid=6243c02604de2ed1242e77d372bc92a3" //API-TOKEN
+
         guard let url = URL(string: openWeatherEndpoint) else {
             print("Error: cannot create URL")
             return
@@ -166,6 +166,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDeleg
                     return
                 }
                 //Get the weather for today and for the next 3 days
+                
+                //TODO: this is wrong: not 3 days but first 3 forecast (by 3 hours each one)
                 for i in 0...3 {
                     if let main = weatherList[i]["main"] as? [String: Any] {
                         if var temp = main["temp"] as? Double{
@@ -257,17 +259,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDeleg
         let weekdays = self.getWeekday()
         
         self.createTextNode(title: weekdays.0, size: 2.3, x: 13, y: 2)
-        //self.createImageNode(width: 3, height: 3, x: 10.5, y: 4, imageName: "\(self.tempTomorrow.1).png")
-        self.createImageNode(width: 3, height: 3, x: 10.5, y: 4, imageName: "cloud.png")
+        self.createImageNode(width: 3, height: 3, x: 10.5, y: 4, imageName: "\(self.tempTomorrow.1).png")
+//        self.createImageNode(width: 3, height: 3, x: 10.5, y: 4, imageName: "cloud.png")
         
         self.createTextNode(title: "\(self.tempTomorrow.0)°C", size: 1.8, x: 13, y: 9)
         self.createTextNode(title: weekdays.1, size: 2.3, x: 6, y: 2)
-        //self.createImageNode(width: 3, height: 3, x: 3, y: 4, imageName: "\(self.tempAfterTomorrow.1).png")
-        self.createImageNode(width: 3, height: 3, x: 3, y: 4, imageName: "rain.png")
+        self.createImageNode(width: 3, height: 3, x: 3, y: 4, imageName: "\(self.tempAfterTomorrow.1).png")
+//        self.createImageNode(width: 3, height: 3, x: 3, y: 4, imageName: "rain.png")
         self.createTextNode(title: "\(self.tempAfterTomorrow.0)°C", size: 1.8, x: 6, y: 9)
         self.createTextNode(title: weekdays.2, size: 2.3, x: -1, y: 2)
-        //self.createImageNode(width: 3, height: 3, x:-3, y: 4, imageName: "\(self.tempAfterAfterTomorrow.1).png")
-        self.createImageNode(width: 3, height: 3, x:-3, y: 4, imageName: "cloudy.png")
+        self.createImageNode(width: 3, height: 3, x:-3, y: 4, imageName: "\(self.tempAfterAfterTomorrow.1).png")
+//        self.createImageNode(width: 3, height: 3, x:-3, y: 4, imageName: "cloudy.png")
         self.createTextNode(title: "\(self.tempAfterAfterTomorrow.0)°C", size: 1.8, x: -1, y: 9)
     }
     /* This method returns the current weekday.
