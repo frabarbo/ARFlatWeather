@@ -167,7 +167,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDeleg
                 }
                 //Get the weather for today and for the next 3 days
                 
-                //TODO: this is wrong: not 3 days but first 3 forecast (by 3 hours each one)
+                //TODO: this is wrong: not 3 days but first 3 forecast (by 3 hours each one!)
                 for i in 0...3 {
                     if let main = weatherList[i]["main"] as? [String: Any] {
                         if var temp = main["temp"] as? Double{
